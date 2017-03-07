@@ -1,0 +1,20 @@
+body {
+	color: #111111;
+/*	background-color: #001f3f;*/
+}
+
+h1 {text-align: center;
+color: #FFDC00;}
+
+p {font-size: 24px;
+	text-align: left;
+	}
+
+.pink {
+	background-color: #FF4136;
+	}
+
+.blue {
+	border: 2px solid #001f3f;
+
+}
