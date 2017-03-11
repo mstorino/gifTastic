@@ -1,74 +1,75 @@
-// Initial array of Feelings
-      var emotion = ["Happy", "Sad", "Frustrated", "Awake"];
-      // var emotionType;
-
-      // Generic function for capturing feelings from the data-attribute SEE LINE 49 ALSO COMMENTED OUT
-      // function logEmotionName() {
-      //   emotionType = $(this).attr("data-name");
-      // }
+// INITIAL DATA ARRAY
+      var emotion = ["Happy", "Frustrated", "Rushed", "Awake", "Surprised", "Calm"];
 
 // CREATE BUTTONS WITH USER INPUT
-            // Display emotion data in buttons
-            function renderButtons() {
+    // Display emotion data in buttons
+      
+      function renderButtons() {
+          $(".gifButtons").empty();
+          
+          for (var i = 0; i < emotion.length; i++) {
+              // DYNAMICALLY CREATE BUTTONS FOR EACH BUTTON
+              var btn = $("<button>");
+              
+              // ADD CLASS TO BUTTON
+              btn.addClass("emotionBtn btn btn-default");
+                      
+              // ADD DATA-ATTRIBUTE
+              btn.attr("data-name", emotion[i]);
+              
+              // BTN TEXT
+              btn.text(emotion[i]);
+                      
+              // ADD BTN INTO HTML
+              $(".gifButtons").append(btn);
 
-                    $(".gifButtons").empty();
+            }
+      }
 
-                    for (var i = 0; i < emotion.length; i++) {
+// FUNCTION TO HANDLE CLICK EVENT OF ONE BUTTON 
 
-                      // Then dynamicaly generating buttons for each movie in the array
-                      // This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
-                      var btn = $("<button>");
-                      // Adding a class of movie to our button
-                      btn.addClass("emotionBtn");
-                      // Adding a data-attribute
-                      btn.attr("data-name", emotion[i]);
-                      // Providing the initial button text
-                      btn.text(emotion[i]);
-                      // Adding the button to the HTML
-                      $(".gifButtons").append(btn);
-                    }
-                  }
+      $("#add-gif").on("click", function(event) {
+          
+          // Preventing the buttons default behavior when clicked (which is submitting a form)
+          event.preventDefault();
+          
+          $("#gif-input").empty();
 
-             // // This function handles events where one button is clicked
-                  $("#add-gif").on("click", function(event) {
-                    // Preventing the buttons default behavior when clicked (which is submitting a form)
-                    event.preventDefault();
+          //  GRAB TEXT INPUT
+          var newEmotion = $("#gif-input").val().trim();
 
-             //        // This line grabs the input from the textbox
-                    var newEmotion = $("#gif-input").val().trim();
+          // ADD TEXT TO ARRAY
+          emotion.push(newEmotion);
 
-             //        // Adding the movie from the textbox to our array
-                    emotion.push(newEmotion);
+          //  CALL FUNCTION TO PROCESS ARRAY
+          renderButtons();
 
-             //        // Calling renderButtons which handles the processing of our movie array
-                    renderButtons();
+      });
 
-                  });
-
-                  // $(document).on("click", ".emotionBtn", logEmotionName);
-
-             //      // Calling the renderButtons function to display the intial buttons
-                  renderButtons();
+//  CALL FUNCTION TO DISPLAY INITIAL ARRAY 
+      renderButtons();
 
 // // ADD GIFS WHEN BUTTON IS CLICKED FROM GIPHY API
  
- $(document).on("click", ".emotionBtn", logAjaxUrl);
+      $(document).on("click", ".emotionBtn", logAjaxUrl);
 
  function logAjaxUrl(){
-//   // Constructing a queryURL using the emotionType
+//  CONSTRUCT QUERYURL USING emotionType
+
       var emotionType = $(this).attr("data-name");
       var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
         emotionType + "&api_key=dc6zaTOxFJmzC&limit=10";
 
+      $(".gifsGoHere").empty();
 
  // Performing an AJAX request with the queryURL
       $.ajax({
           url: queryURL,
           method: "GET"
-        })
+      })
 
-      // After data comes back from the request
-        .done(function(response) {
+// After data comes back from the request
+      .done(function(response) {
           console.log(queryURL);
         
          // storing the data from the AJAX request in the results variable
@@ -78,6 +79,7 @@
 
              // Creating and storing a div tag
             var emotionDiv = $("<div>");
+
             // Creating and storing an image tag
             var emotionImage = $("<img>");
             // Setting the src attribute of the image to a property pulled off the result item
@@ -86,7 +88,7 @@
             emotionImage.attr("data-still", results[i].images.fixed_height_still.url);
             emotionImage.attr("data-animate", results[i].images.fixed_height.url);
             emotionImage.attr("data-state", "still");
-            emotionImage.addClass("gifImg");
+            emotionImage.addClass("gifImg thumbnail");
 
             // Appending the paragraph and image tag to the animalDiv
             emotionDiv.append(emotionImage);
@@ -99,20 +101,17 @@
 };
 
 $(document).on("click", ".gifImg", animateGif);
-// $("gifImg").on("click", animateGif);
 
 function animateGif() {
    
       var state = $(this).attr("data-state");
            
-      // console.log(state);
-
       if (state === "still") {
         $(this).attr("src", $(this).attr("data-animate"));
         $(this).attr("data-state", "animate");
-      } else {
+      } else if (state !== "still"){
         $(this).attr("src", $(this).attr("data-still"));
-        $(this).attr("data-state", still);
+        $(this).attr("data-state", "still");
       }
     };
 

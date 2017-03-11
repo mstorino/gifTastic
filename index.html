@@ -13,8 +13,7 @@
   
   <!--   Main stylesheet -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
-
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico" rel="stylesheet">
 
 </head>
 
@@ -25,32 +24,34 @@
   <!-- Overall Grid -->
   <div class="container">
 
-    <div id = "title" class="row blue">
-      
-      <div class="col-md-12">
-        <h1>Giftastic</h1>
-      </div>
+    <div class="title row blue col-md-12">
+
+        <h1>Feel Your Feelings</h1>
+     
     
     </div> <!-- end  title row -->
 
-    <div class="mainContainer row pink">
-
-      <div class="col-md-12 gifButtons blue">
-      </div><!--  end col-md-12 for gifButtons -->
-
-      <div class="col-md-8 blue gifsGoHere"></div>
-      <div class="col-md-4 formSection blue">
-
-        <form id="gif-form">
-        <label for="gif-input">How are you feeling today?</label>
-        <input type="text" id="gif-input"><br>
-
-        <!-- Button triggers new movie to be added -->
-        <input id="add-gif" type="submit" value="Click to See Your Feelings">
-        </form>
+    <div class="mainContainer row col-md-12">
+      
+      <div class="row col-md-12">
         
-      </div><!--  end col-md-12 for gifButtons -->
+        <div class="formSection blue">
+          <form id="gif-form">
+            <label for="gif-input">How are you feeling today?</label>
+            <input type="text" id="gif-input">
+            <!-- Button triggers new movie to be added -->
+            <input id="add-gif" type="submit" value="Click to Gif-ify Your Feelings">
+          </form>
+        </div><!--  end col-md-4 for formSection -->
 
+         <div class="gifButtons blue"> 
+         </div><!--  end col-md-8 for gifButtons -->
+      
+      </div> <!-- end row -->
+
+      <div class="row">
+        <div class="col-md-12 blue gifsGoHere"></div>
+      </div>
 
     </div> <!-- end mainContainer row-->
   </div><!--  end of container -->
